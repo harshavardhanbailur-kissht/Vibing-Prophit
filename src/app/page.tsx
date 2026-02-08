@@ -6,6 +6,7 @@ import { Logo } from '@/components/Logo';
 import { useFlow } from '@/context/FlowContext';
 import { PHONE_REGEX } from '@/lib/constants';
 import { SocialProofModal } from '@/components/SocialProofModal';
+import { WinterHero } from '@/components/WinterHero';
 
 // Geo-personalization: deterministic city from phone digits
 const CITIES = ['Mumbai', 'Bangalore', 'Delhi NCR', 'Hyderabad', 'Pune', 'Chennai', 'Gurugram', 'Kochi'];
@@ -19,10 +20,10 @@ function getCityFromPhone(phone: string): string | null {
 // Seasonal content based on current month
 function getSeasonalContent() {
   const month = new Date().getMonth();
-  if (month >= 11 || month <= 1) return { label: 'Winter Collection', text: 'Ultra-Luxury Hill Station Retreats' };
-  if (month >= 2 && month <= 4) return { label: 'Spring Preview', text: 'Coastal Villas & Beachfront Properties' };
-  if (month >= 5 && month <= 7) return { label: 'Monsoon Special', text: 'Pre-Launch Prices on Premium Towers' };
-  return { label: 'Festive Edition', text: 'Heritage & Ultra-Luxury Properties' };
+  if (month >= 11 || month <= 1) return { label: 'Winter Collection', text: 'Ultra-Luxury Hill Station Retreats', isWinter: true };
+  if (month >= 2 && month <= 4) return { label: 'Spring Preview', text: 'Coastal Villas & Beachfront Properties', isWinter: false };
+  if (month >= 5 && month <= 7) return { label: 'Monsoon Special', text: 'Pre-Launch Prices on Premium Towers', isWinter: false };
+  return { label: 'Festive Edition', text: 'Heritage & Ultra-Luxury Properties', isWinter: false };
 }
 
 export default function PhonePage() {
@@ -37,12 +38,6 @@ export default function PhonePage() {
 
   // Enhanced feature state
   const [showSocialProof, setShowSocialProof] = useState(false);
-  const [showInviteInput, setShowInviteInput] = useState(false);
-  const [inviteCode, setInviteCode] = useState('');
-  const [inviteStatus, setInviteStatus] = useState<'idle' | 'valid' | 'invalid'>('idle');
-  const [showReferral, setShowReferral] = useState(false);
-  const [referralCode, setReferralCode] = useState('');
-  const [referralVerified, setReferralVerified] = useState(false);
   const [showWhyVerify, setShowWhyVerify] = useState(false);
   const [isReturningUser, setIsReturningUser] = useState(false);
 
@@ -59,18 +54,6 @@ export default function PhonePage() {
   useEffect(() => {
     setIsValid(PHONE_REGEX.test(phone));
   }, [phone]);
-
-  // Validate invite code (prototype: 6+ chars = valid)
-  useEffect(() => {
-    if (inviteCode.length === 0) setInviteStatus('idle');
-    else if (inviteCode.length >= 6) setInviteStatus('valid');
-    else setInviteStatus('invalid');
-  }, [inviteCode]);
-
-  // Validate referral (prototype: 3+ chars = verified)
-  useEffect(() => {
-    setReferralVerified(referralCode.length >= 3);
-  }, [referralCode]);
 
   // Escape key handler for modals
   const handleSocialProofComplete = useCallback(() => {
@@ -133,6 +116,9 @@ export default function PhonePage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
+      {/* Winter Collection: Immersive Background (Aurora + Snow + Mountains) */}
+      {seasonal.isWinter && <WinterHero />}
+
       {/* Hero Video Background */}
       <div className="hero-video-container">
         <video
@@ -188,7 +174,7 @@ export default function PhonePage() {
 
         {/* Tiered Heading */}
         <h1 className="text-hero text-center text-white mb-2 heading-luxury">
-          {isReturningUser ? 'Welcome Back, Elite Member' : 'Join the Exclusive Circle'}
+          {isReturningUser ? 'Welcome Back, Elite Member' : 'Your Exclusive Gateway to Premium Real Estate Deals'}
         </h1>
 
         {/* Geo-personalized Subheading */}
@@ -200,7 +186,7 @@ export default function PhonePage() {
         </p>
 
         {/* Phone Input */}
-        <div className="w-full mb-4">
+        <div className="w-full mb-6">
           <div className="relative">
             {/* Lock Icon + Country Code */}
             <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-text-secondary whitespace-nowrap">
@@ -251,86 +237,6 @@ export default function PhonePage() {
           </div>
         </div>
 
-        {/* Invite Code Section */}
-        <div className="w-full mb-2">
-          <button
-            onClick={() => setShowInviteInput(!showInviteInput)}
-            className="invite-toggle"
-            aria-expanded={showInviteInput}
-          >
-            <svg className="w-3.5 h-3.5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-            </svg>
-            <span>Have an Invite Code?</span>
-            {!showInviteInput && <span className="invite-toggle-badge">Limited Spots</span>}
-            <svg className={`w-3.5 h-3.5 text-text-muted transition-transform flex-shrink-0 ${showInviteInput ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          {showInviteInput && (
-            <div className="invite-input-container" aria-live="polite">
-              <input
-                type="text"
-                value={inviteCode}
-                onChange={e => setInviteCode(e.target.value.toUpperCase().slice(0, 12))}
-                placeholder="Enter invite code"
-                className="input-premium py-3"
-                maxLength={12}
-              />
-              {inviteStatus === 'valid' && (
-                <p className="text-success text-xs mt-2 flex items-center gap-1">
-                  <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Priority Access Unlocked
-                </p>
-              )}
-              {inviteStatus === 'invalid' && inviteCode.length > 0 && (
-                <p className="text-text-muted text-xs mt-2">Enter a valid 6+ character code</p>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Referral Section */}
-        <div className="w-full mb-6">
-          <button
-            onClick={() => setShowReferral(!showReferral)}
-            className="invite-toggle"
-            aria-expanded={showReferral}
-          >
-            <svg className="w-3.5 h-3.5 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <span>Invited by a Friend?</span>
-            <svg className={`w-3.5 h-3.5 text-text-muted transition-transform flex-shrink-0 ml-auto ${showReferral ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-
-          {showReferral && (
-            <div className="invite-input-container" aria-live="polite">
-              <input
-                type="text"
-                value={referralCode}
-                onChange={e => setReferralCode(e.target.value.slice(0, 20))}
-                placeholder="Friend's name or referral code"
-                className="input-premium py-3"
-                maxLength={20}
-              />
-              {referralVerified && (
-                <p className="text-success text-xs mt-2 flex items-center gap-1">
-                  <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  Early Access to New Listings Unlocked
-                </p>
-              )}
-            </div>
-          )}
-        </div>
-
         {/* Continue Button */}
         <button
           onClick={handleContinue}
@@ -359,12 +265,12 @@ export default function PhonePage() {
 
         {/* Tagline */}
         <p className="text-text-muted text-caption mt-6 text-center max-w-xs">
-          Your Exclusive Portal to Premium Real Estate Investments
+          Premium Real Estate Deals, Exclusively Curated
         </p>
 
         {/* Social Proof */}
         <p className="text-text-secondary text-caption mt-4 text-center animate-fade-in">
-          Join <span className="text-gold font-semibold">1,000+</span> Elite Investors
+          Join <span className="text-gold font-semibold">1,000+</span> Elite Deals
         </p>
 
         {/* Trust Indicators */}
@@ -373,13 +279,6 @@ export default function PhonePage() {
         {/* Trust Badges */}
         <div className="trust-badges mt-6">
           <div className="flex items-center justify-center gap-5 flex-wrap">
-            <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span className="text-text-muted text-xs tracking-wide uppercase">SEBI Registered</span>
-            </div>
-
             <div className="flex items-center gap-1.5">
               <svg className="w-4 h-4 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />

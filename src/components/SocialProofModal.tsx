@@ -7,25 +7,91 @@ interface SocialProofModalProps {
   isReturning?: boolean;
 }
 
-const STATS = [
+const ALL_STATS = [
   { value: '\u20B9500 Cr+', label: 'Assets Under Management' },
   { value: '4.8/5', label: 'Verified Investor Rating' },
   { value: '12,000+', label: 'Active Portfolio Holders' },
   { value: '98.7%', label: 'Client Satisfaction Rate' },
+  { value: '350+', label: 'Premium Deals Closed' },
+  { value: '42', label: 'Cities Covered' },
+  { value: '\u20B92.4 Cr', label: 'Average Deal Size' },
+  { value: '15+', label: 'Years Market Experience' },
 ];
 
+const FOOTER_MESSAGES = [
+  'Verifying platform credentials...',
+  'Loading premium deal catalog...',
+  'Preparing personalized recommendations...',
+  'Securing your session...',
+  'Almost ready...',
+];
+
+type Phase = 0 | 1 | 2 | 3 | 4 | 5;
+
 export function SocialProofModal({ onComplete, isReturning }: SocialProofModalProps) {
+  const [phase, setPhase] = useState<Phase>(0);
   const [progress, setProgress] = useState(0);
-  const duration = isReturning ? 2000 : 3000;
+  const [visibleStats, setVisibleStats] = useState<typeof ALL_STATS[number][]>([]);
+  const [footerMsgIndex, setFooterMsgIndex] = useState(0);
+  const [shuffleKey, setShuffleKey] = useState(0);
+
+  const duration = isReturning ? 8000 : 10000;
 
   const stableComplete = useCallback(() => {
     onComplete();
   }, [onComplete]);
 
+  // Phase timeline
+  useEffect(() => {
+    const scale = duration / 10000;
+
+    const t1 = setTimeout(() => {
+      setPhase(1);
+      setVisibleStats(ALL_STATS.slice(0, 2));
+    }, 500 * scale);
+
+    const t2 = setTimeout(() => {
+      setPhase(2);
+      setShuffleKey(prev => prev + 1);
+      setVisibleStats(ALL_STATS.slice(0, 4));
+    }, 2500 * scale);
+
+    const t3 = setTimeout(() => {
+      setPhase(3);
+      setShuffleKey(prev => prev + 1);
+      setVisibleStats([ALL_STATS[4], ALL_STATS[5], ALL_STATS[6], ALL_STATS[7]]);
+    }, 4500 * scale);
+
+    const t4 = setTimeout(() => {
+      setPhase(4);
+      setShuffleKey(prev => prev + 1);
+      setVisibleStats(ALL_STATS.slice(0, 4));
+    }, 6500 * scale);
+
+    const t5 = setTimeout(() => {
+      setPhase(5);
+    }, 8500 * scale);
+
+    const dismissTimer = setTimeout(stableComplete, duration);
+
+    return () => {
+      [t1, t2, t3, t4, t5, dismissTimer].forEach(clearTimeout);
+    };
+  }, [duration, stableComplete]);
+
+  // Footer message rotation
+  useEffect(() => {
+    if (phase < 1) return;
+    const interval = setInterval(() => {
+      setFooterMsgIndex(prev => (prev + 1) % FOOTER_MESSAGES.length);
+    }, 1800);
+    return () => clearInterval(interval);
+  }, [phase]);
+
+  // Progress bar
   useEffect(() => {
     const interval = 30;
     const step = (interval / duration) * 100;
-
     const progressTimer = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -35,14 +101,25 @@ export function SocialProofModal({ onComplete, isReturning }: SocialProofModalPr
         return prev + step;
       });
     }, interval);
+    return () => clearInterval(progressTimer);
+  }, [duration]);
 
-    const dismissTimer = setTimeout(stableComplete, duration);
-
-    return () => {
-      clearInterval(progressTimer);
-      clearTimeout(dismissTimer);
-    };
-  }, [duration, stableComplete]);
+  const getCardClass = (index: number): string => {
+    switch (phase) {
+      case 1:
+        return index < 2 ? 'sp-fly-in' : '';
+      case 2:
+        return index >= 2 ? 'sp-fly-in-delayed' : 'sp-shuffle';
+      case 3:
+        return 'sp-shuffle-rotate';
+      case 4:
+        return 'sp-pulse-glow';
+      case 5:
+        return 'sp-settled';
+      default:
+        return '';
+    }
+  };
 
   return (
     <div
@@ -66,15 +143,22 @@ export function SocialProofModal({ onComplete, isReturning }: SocialProofModalPr
           <span>VERIFIED PLATFORM</span>
         </div>
 
-        {/* Stats Grid */}
-        <div className="social-proof-stats-grid">
-          {STATS.map((stat, i) => (
+        {/* Stats Grid with 3D perspective */}
+        <div className="social-proof-stats-grid sp-perspective" key={shuffleKey}>
+          {visibleStats.map((stat, i) => (
             <div
-              key={i}
-              className="social-proof-stat"
-              style={{ animationDelay: `${i * 200}ms` }}
+              key={`${stat.label}-${shuffleKey}`}
+              className={`social-proof-stat ${getCardClass(i)}`}
+              style={{
+                animationDelay: `${i * 150}ms`,
+                '--card-index': i,
+              } as React.CSSProperties}
             >
-              <div className="social-proof-value">{stat.value}</div>
+              <div className="social-proof-value">
+                <span className={phase >= 3 ? 'sp-counter-animate' : ''}>
+                  {stat.value}
+                </span>
+              </div>
               <div className="social-proof-label">{stat.label}</div>
             </div>
           ))}
@@ -88,11 +172,18 @@ export function SocialProofModal({ onComplete, isReturning }: SocialProofModalPr
           />
         </div>
 
-        {/* Footer */}
-        <p className="social-proof-footer">
-          {isReturning
-            ? 'Welcome back \u2014 restoring your session...'
-            : 'Preparing your secure session...'}
+        {/* Rotating Footer */}
+        <p className="social-proof-footer sp-footer-rotate" key={footerMsgIndex}>
+          {phase === 5 ? (
+            <span className="sp-verified-text">
+              <svg className="sp-checkmark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Session verified. Entering platform...
+            </span>
+          ) : (
+            FOOTER_MESSAGES[footerMsgIndex]
+          )}
         </p>
       </div>
     </div>

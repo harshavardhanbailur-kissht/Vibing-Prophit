@@ -51,6 +51,10 @@ export interface Property {
   siteLng: number;
   shortRationale: string;
   image: string;
+  // Growth / Appreciation data
+  growthPercent: number;
+  growthPeriodYears: number;
+  growthSource: string;
 }
 
 // Risk score component weights (for the "Why this score?" card)
@@ -94,6 +98,9 @@ export const properties: Property[] = [
     siteLng: 73.0220,
     shortRationale: 'CIDCO allotment; transferable under CIDCO transfer rules; close to road/rail infrastructure.',
     image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800',
+    growthPercent: 38,
+    growthPeriodYears: 2,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D2',
@@ -125,6 +132,9 @@ export const properties: Property[] = [
     siteLng: 77.3240,
     shortRationale: 'Authority e-auction plot; expressway access; high logistics demand in Noida corridor.',
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
+    growthPercent: 24,
+    growthPeriodYears: 3,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D3',
@@ -156,6 +166,9 @@ export const properties: Property[] = [
     siteLng: 76.9990,
     shortRationale: 'HLPP Land Entitlement Certificate; developed plot with transfer allowed per HLPP rules.',
     image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800',
+    growthPercent: 31,
+    growthPeriodYears: 2,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D4',
@@ -187,6 +200,9 @@ export const properties: Property[] = [
     siteLng: 72.2760,
     shortRationale: 'NICDC tendered parcel; target for industrial/warehouse anchors along DMIC corridor.',
     image: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800',
+    growthPercent: 18,
+    growthPeriodYears: 3,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D5',
@@ -218,6 +234,9 @@ export const properties: Property[] = [
     siteLng: 72.8311,
     shortRationale: 'Developer signed 24-month buyback; escrow confirmed at ABC Bank; check promoter covenants.',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800',
+    growthPercent: 22,
+    growthPeriodYears: 1.5,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D6',
@@ -249,6 +268,9 @@ export const properties: Property[] = [
     siteLng: 76.8576,
     shortRationale: 'Municipal auction plot; retail strip location; high footfall area in Panchkula.',
     image: 'https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=800',
+    growthPercent: 29,
+    growthPeriodYears: 2,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D7',
@@ -280,6 +302,9 @@ export const properties: Property[] = [
     siteLng: 72.9781,
     shortRationale: 'Leasehold with conversion application filed; conversion to freehold improves liquidity.',
     image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800',
+    growthPercent: 15,
+    growthPeriodYears: 3,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D8',
@@ -311,6 +336,9 @@ export const properties: Property[] = [
     siteLng: 76.3090,
     shortRationale: 'RERA-registered project; MOUs with institutional anchor buyers; steady demand in IT corridor.',
     image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800',
+    growthPercent: 26,
+    growthPeriodYears: 2,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D9',
@@ -342,6 +370,9 @@ export const properties: Property[] = [
     siteLng: 83.2185,
     shortRationale: 'Port authority tender; strong logistics demand; industrial corridor linkage to hinterland.',
     image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800',
+    growthPercent: 20,
+    growthPeriodYears: 3,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D10',
@@ -373,6 +404,9 @@ export const properties: Property[] = [
     siteLng: 81.6296,
     shortRationale: 'State allotment in planned new capital; steady public-sector demand; good infrastructure roadmap.',
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800',
+    growthPercent: 33,
+    growthPeriodYears: 3,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D11',
@@ -404,6 +438,9 @@ export const properties: Property[] = [
     siteLng: 72.8200,
     shortRationale: '12\u201318 month buyback window; escrow partial coverage; promoter must meet solvency test.',
     image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800',
+    growthPercent: 12,
+    growthPeriodYears: 1,
+    growthSource: 'PropHit Research',
   },
   {
     id: 'D12',
@@ -435,6 +472,9 @@ export const properties: Property[] = [
     siteLng: 77.3425,
     shortRationale: 'Special category allotment; transfer rules are municipal; slower resale cadence expected.',
     image: 'https://images.unsplash.com/photo-1464938050520-ef2571e2e89f?w=800',
+    growthPercent: 19,
+    growthPeriodYears: 2,
+    growthSource: 'PropHit Research',
   },
 ];
 
@@ -491,4 +531,15 @@ export function getRiskColor(band: RiskBand): string {
     High: 'risk-high',
   };
   return map[band];
+}
+
+// Lookup a single property by ID (for detail page)
+export function getPropertyById(id: string): Property | undefined {
+  return properties.find((p) => p.id === id);
+}
+
+// Combined label: "CIDCO · Government Plot"
+export function getPropertyLabel(property: Property): string {
+  const authority = property.developerName || property.issuingAuthority;
+  return `${authority} \u00B7 ${property.assetType}`;
 }
