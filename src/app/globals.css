@@ -534,6 +534,13 @@ body {
     transform: none !important;
   }
 
+  /* Trust dashboard — disable expandable animations */
+  .score-breakdown,
+  .exit-card-content,
+  .invite-input-container {
+    animation: none !important;
+  }
+
   .welcome-line {
     width: 80px !important;
   }
@@ -990,6 +997,16 @@ body {
   .otp-box {
     border: 2px solid CanvasText;
   }
+
+  .exit-badge,
+  .risk-dot,
+  .trust-chip,
+  .exit-card-toggle,
+  .exit-card-content,
+  .score-breakdown,
+  .doc-chip {
+    border: 1px solid CanvasText;
+  }
 }
 
 /* ========================================
@@ -1210,4 +1227,156 @@ body {
 @keyframes welcomePulseHint {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+/* ========================================
+   TRUST-FIRST DASHBOARD — Property Cards
+   ======================================== */
+
+/* Exit Type Badge (top-left on image) */
+.exit-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--border-gold);
+}
+
+/* Risk Score Dot (top-right on image) */
+.risk-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 2px solid currentColor;
+}
+
+/* Trust Chips Row */
+.trust-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+/* Trust Chip (individual) */
+.trust-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  cursor: default;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.trust-chip:hover {
+  border-color: var(--border-gold);
+}
+
+.trust-chip svg {
+  color: var(--success);
+  flex-shrink: 0;
+}
+
+/* Escrow chip — gold accent */
+.trust-chip-escrow {
+  border-color: var(--border-gold);
+  background: rgba(201, 169, 98, 0.06);
+}
+
+.trust-chip-escrow svg {
+  color: var(--gold);
+}
+
+/* Score Breakdown (expandable) */
+.score-breakdown {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  animation: fadeInDown 0.2s ease-out;
+}
+
+/* Exit Card Toggle Button */
+.exit-card-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(201, 169, 98, 0.05);
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+}
+
+.exit-card-toggle:hover {
+  background: rgba(201, 169, 98, 0.1);
+}
+
+/* Exit Card Content (expanded) */
+.exit-card-content {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  animation: fadeInDown 0.25s ease-out;
+}
+
+/* Document Chips */
+.doc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.6rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+}
+
+.doc-chip:hover {
+  color: var(--text-secondary);
+  border-color: var(--border-gold);
+}
+
+.doc-chip svg {
+  color: var(--gold);
+  flex-shrink: 0;
 }
