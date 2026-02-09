@@ -121,7 +121,7 @@ export default function PhonePage() {
   const headingWords = headingText.split(' ');
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
       {/* Winter Collection: Immersive Background (Aurora + Snow + Mountains) */}
       {seasonal.isWinter && <WinterHero />}
 
@@ -169,40 +169,8 @@ export default function PhonePage() {
         </button>
       </div>
 
-      {/* Desktop: Brand Side Panel (hidden on mobile) */}
-      <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-center lg:pr-12 relative z-10">
-        <div className="max-w-md">
-          <h2 className="text-3xl xl:text-4xl text-white heading-luxury mb-4 leading-tight">
-            Premium Real Estate,<br />
-            <span className="text-gold">Exclusively Curated</span>
-          </h2>
-          <p className="text-text-secondary leading-relaxed mb-10 text-base">
-            Join India&apos;s most exclusive platform for verified real estate opportunities
-            with institutional-grade due diligence and credible exit mechanisms.
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-5 rounded-xl bg-bg-card/50 border border-border-subtle backdrop-blur-sm">
-              <p className="text-gold text-2xl font-semibold heading-luxury">{'\u20B9'}500 Cr+</p>
-              <p className="text-text-muted text-xs mt-1">Assets Under Management</p>
-            </div>
-            <div className="p-5 rounded-xl bg-bg-card/50 border border-border-subtle backdrop-blur-sm">
-              <p className="text-gold text-2xl font-semibold heading-luxury">12,000+</p>
-              <p className="text-text-muted text-xs mt-1">Active Investors</p>
-            </div>
-            <div className="p-5 rounded-xl bg-bg-card/50 border border-border-subtle backdrop-blur-sm">
-              <p className="text-gold text-2xl font-semibold heading-luxury">350+</p>
-              <p className="text-text-muted text-xs mt-1">Premium Deals Closed</p>
-            </div>
-            <div className="p-5 rounded-xl bg-bg-card/50 border border-border-subtle backdrop-blur-sm">
-              <p className="text-gold text-2xl font-semibold heading-luxury">4.8/5</p>
-              <p className="text-text-muted text-xs mt-1">Investor Rating</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Content Container */}
-      <div className="login-form-container w-full max-w-sm lg:max-w-md lg:flex-shrink-0 relative z-10">
+      {/* Content Container — centered on all screens */}
+      <div className="login-form-container w-full max-w-sm sm:max-w-md relative z-10">
         <div className="login-form-inner flex flex-col items-center page-transition">
         {/* Seasonal Badge */}
         <div className="seasonal-badge" aria-label={`${seasonal.label}: ${seasonal.text}`}>
@@ -237,15 +205,12 @@ export default function PhonePage() {
 
         {/* Phone Input */}
         <div className="w-full mb-6">
-          <div className="relative">
-            {/* Lock Icon + Country Code */}
-            <div className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5 sm:gap-2 text-text-secondary whitespace-nowrap">
-              <svg className="w-4 h-4 text-gold flex-shrink-0 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span className="text-base sm:text-lg">{'\u{1F1EE}\u{1F1F3}'}</span>
-              <span className="font-medium text-sm sm:text-base">+91</span>
-              <div className="w-px h-5 sm:h-6 bg-border-subtle" />
+          <div className={`phone-input-group ${isValid ? 'valid' : ''}`}>
+            {/* Country Code Prefix */}
+            <div className="phone-prefix">
+              <span className="text-base sm:text-lg leading-none">{'\u{1F1EE}\u{1F1F3}'}</span>
+              <span className="font-medium text-sm text-text-secondary">+91</span>
+              <div className="phone-divider" />
             </div>
 
             {/* Input */}
@@ -257,13 +222,13 @@ export default function PhonePage() {
               onKeyDown={handleKeyDown}
               placeholder="9876543210"
               autoFocus
-              className={`input-premium pl-20 sm:pl-28 ${isValid ? 'valid' : ''}`}
+              className="phone-input-field"
               aria-label="Mobile number"
             />
 
             {/* Valid Indicator */}
             {isValid && (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2">
+              <div className="phone-valid-icon">
                 <svg className="w-5 h-5 text-success success-check" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>

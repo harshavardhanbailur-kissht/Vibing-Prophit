@@ -66,9 +66,12 @@ export default function VerifyPage() {
     : '';
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
+      {/* Page Aurora (consistent with login) */}
+      <div className="login-aurora" aria-hidden="true" />
+
       {/* Content Container */}
-      <div className="w-full max-w-sm lg:max-w-md flex flex-col items-center page-transition">
+      <div className="w-full max-w-sm sm:max-w-md flex flex-col items-center page-transition relative z-10">
         {/* Back Button */}
         <button
           onClick={handleBack}
