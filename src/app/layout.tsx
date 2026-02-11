@@ -6,7 +6,7 @@ import { LuxuryWatermark } from "@/components/LuxuryWatermark";
 import { PrestigeToggle } from "@/components/PrestigeToggle";
 import { FeedbackWidget } from "@/components/FeedbackWidget";
 
-// Premium serif font for headlines
+// Premium serif font for headlines — variable for flexible weight control
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 // Clean sans-serif for body text
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });
@@ -28,7 +28,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#080f1e',
+  themeColor: '#050505',
 };
 
 export const metadata: Metadata = {
@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="antialiased font-sans">
-        {/* Ambient Sapphire-Gold Aurora */}
+        {/* Warm Ambient Gold Aurora */}
         <div className="aurora-ambient" aria-hidden="true" />
 
         {/* Architectural Grid Background */}

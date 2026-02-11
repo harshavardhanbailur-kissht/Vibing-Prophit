@@ -71,7 +71,8 @@ export default function VerifyPage() {
       <div className="login-aurora" aria-hidden="true" />
 
       {/* Content Container */}
-      <div className="w-full max-w-sm sm:max-w-md flex flex-col items-center page-transition relative z-10">
+      <div className="login-form-container w-full max-w-sm sm:max-w-md relative z-10">
+        <div className="login-form-inner flex flex-col items-center page-transition">
         {/* Back Button */}
         <button
           onClick={handleBack}
@@ -84,7 +85,7 @@ export default function VerifyPage() {
         </button>
 
         {/* Logo */}
-        <Logo className="w-48 h-12 mb-12" variant="dark" />
+        <Logo className="w-56 h-10 mb-12" variant="dark" />
 
         {/* Heading */}
         <h1 className="text-title text-center text-white mb-2 heading-luxury">
@@ -140,7 +141,8 @@ export default function VerifyPage() {
 
         {/* Trust Line */}
         <div className="gold-line w-24 mt-8" />
-      </div>
+        </div>{/* close login-form-inner */}
+      </div>{/* close login-form-container */}
     </div>
   );
 }

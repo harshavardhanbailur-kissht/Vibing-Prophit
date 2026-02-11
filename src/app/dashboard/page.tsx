@@ -31,7 +31,7 @@ export default function DashboardPage() {
     <div className="min-h-screen flex flex-col px-4 sm:px-6 lg:px-8 py-8 max-w-7xl mx-auto safe-top safe-bottom">
       {/* Header */}
       <header className="flex items-center justify-between mb-8 page-transition">
-        <Logo className="w-32 h-8" variant="dark" />
+        <Logo className="w-40 h-7" variant="dark" />
         <button
           onClick={handleLogout}
           className="text-text-muted hover:text-text-primary text-sm transition-colors py-2 px-3 min-h-[44px] flex items-center"
@@ -42,10 +42,10 @@ export default function DashboardPage() {
 
       {/* Welcome Section */}
       <section className="mb-8 page-transition">
-        <h1 className="text-hero text-white mb-1 heading-luxury">
+        <h1 className="text-hero text-text-primary mb-1 heading-luxury">
           Welcome, <span className="text-shimmer-gold">{state.displayName}</span>
         </h1>
-        <p className="text-text-secondary">
+        <p className="text-text-secondary text-subtitle">
           Verified assets with credible exit mechanisms
         </p>
       </section>

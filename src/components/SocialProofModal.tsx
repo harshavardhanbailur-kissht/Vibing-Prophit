@@ -129,7 +129,7 @@ export function SocialProofModal({ onComplete, isReturning }: SocialProofModalPr
     >
       <div className="social-proof-modal" onClick={e => e.stopPropagation()}>
         {/* Verified Badge */}
-        <div className="social-proof-badge">
+        <div className="social-proof-badge badge-verified">
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"

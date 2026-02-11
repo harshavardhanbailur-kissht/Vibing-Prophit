@@ -6,7 +6,6 @@ import { Logo } from '@/components/Logo';
 import { useFlow } from '@/context/FlowContext';
 import { PHONE_REGEX } from '@/lib/constants';
 import { SocialProofModal } from '@/components/SocialProofModal';
-import { WinterHero } from '@/components/WinterHero';
 
 // Geo-personalization: deterministic city from phone digits
 const CITIES = ['Mumbai', 'Bangalore', 'Delhi NCR', 'Hyderabad', 'Pune', 'Chennai', 'Gurugram', 'Kochi'];
@@ -17,14 +16,6 @@ function getCityFromPhone(phone: string): string | null {
   return CITIES[sum % CITIES.length];
 }
 
-// Seasonal content based on current month
-function getSeasonalContent() {
-  const month = new Date().getMonth();
-  if (month >= 11 || month <= 1) return { label: 'Winter Collection', text: 'Ultra-Luxury Hill Station Retreats', isWinter: true };
-  if (month >= 2 && month <= 4) return { label: 'Spring Preview', text: 'Coastal Villas & Beachfront Properties', isWinter: false };
-  if (month >= 5 && month <= 7) return { label: 'Monsoon Special', text: 'Pre-Launch Prices on Premium Towers', isWinter: false };
-  return { label: 'Festive Edition', text: 'Heritage & Ultra-Luxury Properties', isWinter: false };
-}
 
 export default function PhonePage() {
   const router = useRouter();
@@ -41,7 +32,6 @@ export default function PhonePage() {
   const [showWhyVerify, setShowWhyVerify] = useState(false);
   const [isReturningUser, setIsReturningUser] = useState(false);
 
-  const seasonal = getSeasonalContent();
   const detectedCity = getCityFromPhone(phone);
 
   // Check returning user on mount
@@ -122,9 +112,6 @@ export default function PhonePage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
-      {/* Winter Collection: Immersive Background (Aurora + Snow + Mountains) */}
-      {seasonal.isWinter && <WinterHero />}
-
       {/* Login Aurora Gradient */}
       <div className="login-aurora" aria-hidden="true" />
 
@@ -172,15 +159,11 @@ export default function PhonePage() {
       {/* Content Container — centered on all screens */}
       <div className="login-form-container w-full max-w-sm sm:max-w-md relative z-10">
         <div className="login-form-inner flex flex-col items-center page-transition">
-        {/* Seasonal Badge */}
-        <div className="seasonal-badge" aria-label={`${seasonal.label}: ${seasonal.text}`}>
-          <span className="seasonal-badge-label">{seasonal.label}</span>
-          <span className="seasonal-badge-divider" />
-          <span className="seasonal-badge-text">{seasonal.text}</span>
-        </div>
-
         {/* Logo */}
-        <Logo className="w-48 h-12 mb-12" variant="dark" />
+        <Logo className="w-56 h-10 mb-6" variant="dark" />
+
+        {/* Gold accent separator */}
+        <div className="gold-line w-16 mb-8" />
 
         {/* Kinetic Typography Heading */}
         <h1 className="text-hero text-center text-white mb-2 heading-luxury" style={{ perspective: '600px' }}>
@@ -289,7 +272,7 @@ export default function PhonePage() {
         </p>
 
         {/* Trust Indicators */}
-        <div className="gold-line w-24 mt-6" />
+        <div className="gold-line w-32 mt-6" />
 
         {/* Trust Badges — Staggered Entrance */}
         <div className="trust-badges mt-6">
@@ -310,7 +293,7 @@ export default function PhonePage() {
           </div>
 
           <p className="text-text-muted text-xs text-center mt-4 italic trust-badge-item">
-            &ldquo;Transformed my portfolio in just 6 months&rdquo;
+            <span className="text-gold opacity-60">&ldquo;</span>Transformed my portfolio in just 6 months<span className="text-gold opacity-60">&rdquo;</span>
             <span className="text-text-secondary not-italic"> &mdash; Rajesh M., Mumbai</span>
           </p>
         </div>

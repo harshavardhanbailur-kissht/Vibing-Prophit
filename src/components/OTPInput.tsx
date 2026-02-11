@@ -113,7 +113,7 @@ export function OTPInput({
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex gap-3 otp-perspective">
+      <div className="flex gap-4 otp-perspective">
         {otp.map((digit, index) => (
           <input
             key={index}
