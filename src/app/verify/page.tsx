@@ -65,84 +65,101 @@ export default function VerifyPage() {
     ? `+91 ${state.phone.slice(0, 2)}****${state.phone.slice(-2)}`
     : '';
 
+  // Progress bar percentage (inverted: starts full, drains to 0)
+  const progressPercent = (countdown / 30) * 100;
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12 safe-top safe-bottom relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-12 safe-top safe-bottom relative overflow-hidden">
       {/* Page Aurora (consistent with login) */}
       <div className="login-aurora" aria-hidden="true" />
 
-      {/* Content Container */}
-      <div className="login-form-container w-full max-w-sm sm:max-w-md relative z-10">
-        <div className="login-form-inner flex flex-col items-center page-transition">
-        {/* Back Button */}
-        <button
-          onClick={handleBack}
-          className="fixed top-6 left-6 p-2 text-text-muted hover:text-text-primary transition-colors z-20 safe-top"
-          aria-label="Go back"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
+      {/* Back Button — Glass styled with gold chevron */}
+      <button
+        onClick={handleBack}
+        className="fixed top-6 left-6 p-2.5 rounded-xl backdrop-blur-xl border border-gold/10 bg-titanium-surface/40 text-gold/70 hover:text-gold hover:border-gold/25 hover:bg-titanium-surface/60 transition-all duration-300 z-20 safe-top"
+        aria-label="Go back"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
 
-        {/* Logo */}
-        <Logo className="w-56 h-10 mb-12" variant="dark" />
+      {/* Glass Card Content Container */}
+      <div className="glass-card-hero w-full max-w-sm sm:max-w-md relative z-10 p-8 sm:p-10">
+        <div className="flex flex-col items-center">
+          {/* Logo */}
+          <Logo className="w-56 h-10 mb-4" variant="dark" />
 
-        {/* Heading */}
-        <h1 className="text-title text-center text-white mb-2 heading-luxury">
-          Secure Verification
-        </h1>
-        <p className="text-text-secondary text-center mb-8">
-          Enter the code sent to {maskedPhone}
-        </p>
+          {/* Exclusive Access Micro-Label */}
+          <div className="flex items-center gap-2 mb-6">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-gold/40" />
+            <span className="text-micro text-gold/70 tracking-[0.25em] uppercase">Exclusive Access</span>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-gold/40" />
+          </div>
 
-        {/* OTP Input */}
-        <div className="mb-8">
-          <OTPInput
-            length={4}
-            onComplete={handleOTPComplete}
-            isError={isError}
-            isSuccess={isSuccess}
-            autoFocus
-          />
+          {/* Heading — Cormorant Garamond */}
+          <h1 className="text-display text-center text-white mb-3 font-display">
+            Secure Vault Access
+          </h1>
+
+          {/* Subheading — masked phone */}
+          <p className="text-text-secondary text-center mb-8 text-sm">
+            Enter the code sent to <span className="text-gold/80 font-medium">{maskedPhone}</span>
+          </p>
+
+          {/* Gold Separator */}
+          <div className="gold-line w-16 mb-8" />
+
+          {/* OTP Input */}
+          <div className="mb-8">
+            <OTPInput
+              length={4}
+              onComplete={handleOTPComplete}
+              isError={isError}
+              isSuccess={isSuccess}
+              autoFocus
+            />
+          </div>
+
+          {/* Resend with Horizontal Gold Progress Bar */}
+          <div className="w-full flex flex-col items-center gap-4">
+            {canResend ? (
+              <button
+                onClick={handleResend}
+                className="text-gold hover:text-gold-light transition-colors text-sm font-medium tracking-wide"
+              >
+                Resend code
+              </button>
+            ) : (
+              <div className="w-full flex flex-col items-center gap-3">
+                {/* Horizontal Progress Bar */}
+                <div className="w-full max-w-[200px] h-[2px] rounded-full bg-titanium-elevated/80 overflow-hidden relative">
+                  <div
+                    className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light transition-all duration-1000 linear"
+                    style={{
+                      width: `${progressPercent}%`,
+                      boxShadow: '0 0 8px rgba(201, 169, 98, 0.3)',
+                    }}
+                  />
+                </div>
+                <p className="text-text-muted text-sm">
+                  Resend in <span className="text-text-secondary font-medium tabular-nums">{countdown}s</span>
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Gold Separator */}
+          <div className="gold-line w-24 mt-8" />
+
+          {/* Demo Hint — Premium styled */}
+          <div className="mt-6 px-4 py-2.5 rounded-xl border border-gold/8 bg-titanium-surface/30 backdrop-blur-sm">
+            <p className="text-text-muted text-caption text-center">
+              Demo mode <span className="text-gold/30 mx-1.5">&middot;</span> Enter <span className="text-gold font-mono tracking-widest font-medium">1111</span> to verify
+            </p>
+          </div>
         </div>
-
-        {/* Resend with Countdown Ring */}
-        <div className="text-center flex flex-col items-center">
-          {canResend ? (
-            <button
-              onClick={handleResend}
-              className="text-gold hover:text-gold-light transition-colors text-sm font-medium"
-            >
-              Resend code
-            </button>
-          ) : (
-            <div className="flex items-center gap-3">
-              <svg width="36" height="36" viewBox="0 0 36 36" className="countdown-ring">
-                <circle cx="18" cy="18" r="15" fill="none" stroke="var(--border-subtle)" strokeWidth="2" />
-                <circle
-                  cx="18" cy="18" r="15" fill="none" stroke="var(--gold)" strokeWidth="2"
-                  strokeDasharray={15 * 2 * Math.PI}
-                  strokeDashoffset={15 * 2 * Math.PI * (1 - (30 - countdown) / 30)}
-                  strokeLinecap="round"
-                  className="countdown-ring-progress"
-                />
-              </svg>
-              <p className="text-text-muted text-sm">
-                Resend in <span className="text-text-secondary font-medium">{countdown}s</span>
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Demo Hint */}
-        <p className="text-text-muted text-caption mt-12 text-center">
-          Demo mode: Enter <span className="text-gold font-mono">1111</span> to verify
-        </p>
-
-        {/* Trust Line */}
-        <div className="gold-line w-24 mt-8" />
-        </div>{/* close login-form-inner */}
-      </div>{/* close login-form-container */}
+      </div>
     </div>
   );
 }

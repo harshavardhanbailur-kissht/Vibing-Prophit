@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display, Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { FlowProvider } from "@/context/FlowContext";
 import { LuxuryWatermark } from "@/components/LuxuryWatermark";
@@ -22,17 +22,25 @@ const inter = Inter({
   display: "swap",
 });
 
+// Ultra-luxury display font for hero moments
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#050505',
+  themeColor: '#020202',
 };
 
 export const metadata: Metadata = {
-  title: "PropHit | Real Estate Participation",
+  title: "PropHit | Premium Real Estate Participation",
   description: "Your exclusive portal to premium real estate investments in India. Secured, seamless, and institutional-grade.",
   appleWebApp: {
     capable: true,
@@ -47,21 +55,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${cormorant.variable}`}>
       <body className="antialiased font-sans">
-        {/* Warm Ambient Gold Aurora */}
+        {/* Warm Ambient Gold Aurora — Enhanced: 6 orbs, slower movement */}
         <div className="aurora-ambient" aria-hidden="true" />
 
-        {/* Architectural Grid Background */}
+        {/* Architectural Diamond Grid Background */}
         <div className="grid-background" aria-hidden="true" />
 
         {/* Subtle Noise Texture */}
         <div className="noise-overlay" aria-hidden="true" />
 
-        {/* Floating Gold Particles */}
+        {/* Floating Gold Particles — Enhanced: 8 particles with dust motes */}
         <div className="luxury-particles" aria-hidden="true">
           <span className="luxury-particle" />
           <span className="luxury-particle" />
+          <span className="luxury-particle" />
+          <span className="luxury-particle" />
+          <span className="luxury-particle" />
+          <span className="luxury-particle" />
+          <span className="luxury-particle luxury-particle-dust" />
+          <span className="luxury-particle luxury-particle-dust" />
         </div>
 
         {/* Luxury Building Watermark */}

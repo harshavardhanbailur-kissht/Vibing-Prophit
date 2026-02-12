@@ -55,16 +55,14 @@ export function Logo({ className = '', variant = 'dark' }: LogoProps) {
         OPHIT
       </text>
 
-      {/* Growth Arrows — 4 upward chevrons, gaps increase for exponential growth */}
+      {/* Growth Arrows — 2-column staircase (matches brand logo) */}
       <g transform="translate(200, 3)">
-        {/* Arrow 1 — bottom (starts at text midpoint) */}
-        <path d="M10 19 L0 24 L4 24 L10 21 L16 24 L20 24 Z" fill={textColor} />
-        {/* Arrow 2 */}
-        <path d="M10 13 L0 18 L4 18 L10 15 L16 18 L20 18 Z" fill={textColor} />
-        {/* Arrow 3 (gold — profit zone) */}
-        <path d="M10 6 L0 11 L4 11 L10 8 L16 11 L20 11 Z" fill={goldColor} />
-        {/* Arrow 4 — top (gold, leading growth) */}
-        <path d="M10 -2 L0 3 L4 3 L10 0 L16 3 L20 3 Z" fill={goldColor} />
+        {/* Left column — base growth */}
+        <path d="M13 28 L0 36 L5 36 L13 31 L21 36 L26 36 Z" fill={textColor} />
+        <path d="M13 18 L0 26 L5 26 L13 21 L21 26 L26 26 Z" fill={textColor} />
+        {/* Right column — stepped right, exponential profit */}
+        <path d="M37 8 L24 16 L29 16 L37 11 L45 16 L50 16 Z" fill={goldColor} />
+        <path d="M37 -2 L24 6 L29 6 L37 1 L45 6 L50 6 Z" fill={goldColor} />
       </g>
     </svg>
   );

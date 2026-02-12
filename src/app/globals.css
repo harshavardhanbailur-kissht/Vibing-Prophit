@@ -4,36 +4,69 @@
 
 /* Inter font loaded via next/font/google in layout.tsx */
 
-/* Premium Design Tokens — Warm True Black + Muted Gold */
+/* ========================================
+   BLACK TITANIUM & LIQUID GOLD DESIGN SYSTEM
+   PropHit Ultra-Luxurious Design Tokens
+   ======================================== */
 :root {
+  /* Titanium Blacks — 5 depth levels */
   --bg-primary: #050505;
   --bg-secondary: #0a0a0a;
   --bg-card: #111111;
   --bg-elevated: #1a1a1a;
+  --bg-raised: #222222;
+  --bg-void: #020202;
 
+  /* Liquid Gold — 7-stop gradient system */
   --gold: #C9A962;
-  --gold-dark: #A8893D;
+  --gold-dark: #8B6914;
+  --gold-medium: #A8893D;
   --gold-light: #D4BC78;
+  --gold-bright: #E8D5A0;
   --gold-champagne: #E8D5A0;
+  --gold-white: #F5EDD6;
   --gold-glow: rgba(201, 169, 98, 0.12);
+  --gold-glow-sm: rgba(201, 169, 98, 0.08);
+  --gold-glow-md: rgba(201, 169, 98, 0.15);
+  --gold-glow-lg: rgba(201, 169, 98, 0.25);
+  --gold-glow-xl: rgba(201, 169, 98, 0.40);
 
+  /* Text Hierarchy */
+  --text-headline: #FFFFFF;
   --text-primary: #F5F1E8;
-  --text-secondary: #A09A8A;
+  --text-secondary: #B0A898;
   --text-muted: #6B6560;
+  --text-ghost: #3A3632;
 
+  /* Borders */
   --border-subtle: rgba(201, 169, 98, 0.06);
   --border-gold: rgba(201, 169, 98, 0.2);
+  --border-gold-strong: rgba(201, 169, 98, 0.35);
 
+  /* Glassmorphism */
+  --glass-bg: rgba(17, 17, 17, 0.60);
+  --glass-bg-heavy: rgba(10, 10, 10, 0.80);
+  --glass-border: rgba(201, 169, 98, 0.10);
+  --glass-blur: 24px;
+  --glass-saturate: 1.3;
+
+  /* Semantic */
   --success: #4ADE80;
   --error: #F87171;
 
+  /* Layout */
   --radius: 1rem;
   --radius-sm: 0.75rem;
   --radius-lg: 1.25rem;
+
+  /* Motion */
   --duration: 300ms;
   --duration-slow: 500ms;
+  --duration-dramatic: 800ms;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-precision: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-decel: cubic-bezier(0, 0.55, 0.45, 1);
 }
 
 /* Base Styles */
@@ -91,7 +124,7 @@ body {
   scrollbar-color: rgba(201, 169, 98, 0.15) var(--bg-primary);
 }
 
-/* Architectural Grid Background */
+/* Architectural Diamond Grid Background */
 .grid-background {
   position: fixed;
   inset: 0;
@@ -103,19 +136,22 @@ body {
 .grid-background::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
   background-image:
-    linear-gradient(rgba(201, 169, 98, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 169, 98, 0.02) 1px, transparent 1px);
-  background-size: 160px 160px;
-  opacity: 0.4;
+    linear-gradient(45deg, rgba(201, 169, 98, 0.015) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(201, 169, 98, 0.015) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.5;
+  transform: rotate(0deg);
 }
 
 .grid-background::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 90% 80% at 50% 50%, transparent 0%, rgba(5, 5, 5, 0.8) 80%);
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, transparent 0%, rgba(2, 2, 2, 0.85) 75%);
 }
 
 /* Subtle Noise Texture */
@@ -124,7 +160,7 @@ body {
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  opacity: 0.015;
+  opacity: 0.008;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
@@ -542,100 +578,144 @@ body {
 .luxury-particles::after {
   content: '';
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--gold);
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
   border-radius: 50%;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 .luxury-particles::before {
   top: 18%;
   left: 12%;
-  animation: float-particle 30s ease-in-out infinite;
+  animation: float-particle 18s ease-in-out infinite;
 }
 
 .luxury-particles::after {
   top: 55%;
   right: 18%;
-  animation: float-particle-alt 35s ease-in-out infinite;
+  width: 5px;
+  height: 5px;
+  animation: float-particle-alt 22s ease-in-out infinite;
 }
 
 /* Additional particles via child elements */
 .luxury-particle {
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--gold);
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
   border-radius: 50%;
-  opacity: 0.25;
+  opacity: 0.4;
 }
 
 .luxury-particle:nth-child(1) {
   top: 35%;
   left: 72%;
-  animation: float-particle 28s ease-in-out infinite 5s;
+  width: 4px;
+  height: 4px;
+  animation: float-particle 16s ease-in-out infinite 2s;
 }
 
 .luxury-particle:nth-child(2) {
   top: 75%;
   left: 28%;
-  width: 2.5px;
-  height: 2.5px;
-  animation: float-particle-alt 32s ease-in-out infinite 10s;
+  width: 5px;
+  height: 5px;
+  animation: float-particle-alt 20s ease-in-out infinite 5s;
+  opacity: 0.45;
 }
 
 .luxury-particle:nth-child(3) {
   top: 15%;
   left: 55%;
-  width: 1.5px;
-  height: 1.5px;
-  animation: float-particle 40s ease-in-out infinite 15s;
-  opacity: 0.2;
+  animation: float-particle 24s ease-in-out infinite 8s;
+  opacity: 0.35;
 }
 
 .luxury-particle:nth-child(4) {
   top: 88%;
   left: 45%;
-  animation: float-particle-alt 36s ease-in-out infinite 20s;
-  opacity: 0.2;
+  width: 4px;
+  height: 4px;
+  animation: float-particle-alt 18s ease-in-out infinite 3s;
+  opacity: 0.4;
+}
+
+.luxury-particle:nth-child(5) {
+  top: 50%;
+  left: 85%;
+  width: 3px;
+  height: 3px;
+  animation: float-particle 22s ease-in-out infinite 6s;
+  opacity: 0.35;
+}
+
+.luxury-particle:nth-child(6) {
+  top: 25%;
+  left: 35%;
+  width: 4px;
+  height: 4px;
+  animation: float-particle-alt 19s ease-in-out infinite 4s;
+  opacity: 0.3;
+}
+
+/* Dust mote particles — larger, slower, more ethereal */
+.luxury-particle-dust {
+  width: 8px !important;
+  height: 8px !important;
+  background: radial-gradient(circle, rgba(201, 169, 98, 0.15) 0%, transparent 70%) !important;
+  opacity: 0.2 !important;
+  mix-blend-mode: screen;
+}
+
+.luxury-particle:nth-child(7) {
+  top: 40%;
+  left: 15%;
+  animation: float-particle 30s ease-in-out infinite 2s;
+}
+
+.luxury-particle:nth-child(8) {
+  top: 65%;
+  left: 70%;
+  animation: float-particle-alt 28s ease-in-out infinite 7s;
 }
 
 @keyframes float-particle {
   0%, 100% {
     transform: translateY(0) translateX(0);
-    opacity: 0.2;
+    opacity: 0.3;
   }
   25% {
-    transform: translateY(-40px) translateX(15px);
-    opacity: 0.35;
+    transform: translateY(-80px) translateX(30px);
+    opacity: 0.6;
   }
   50% {
-    transform: translateY(-20px) translateX(-20px);
-    opacity: 0.25;
+    transform: translateY(-40px) translateX(-40px);
+    opacity: 0.4;
   }
   75% {
-    transform: translateY(-50px) translateX(10px);
-    opacity: 0.3;
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0.5;
   }
 }
 
 @keyframes float-particle-alt {
   0%, 100% {
     transform: translateY(0) translateX(0);
-    opacity: 0.2;
+    opacity: 0.3;
   }
   20% {
-    transform: translateY(-25px) translateX(-12px);
-    opacity: 0.35;
+    transform: translateY(-50px) translateX(-25px);
+    opacity: 0.55;
   }
   45% {
-    transform: translateY(-45px) translateX(18px);
-    opacity: 0.2;
+    transform: translateY(-90px) translateX(35px);
+    opacity: 0.35;
   }
   70% {
-    transform: translateY(-15px) translateX(-8px);
-    opacity: 0.3;
+    transform: translateY(-30px) translateX(-15px);
+    opacity: 0.5;
   }
 }
 
@@ -684,9 +764,9 @@ body {
 :root[data-theme="prestige"] .hero-video-overlay {
   background: linear-gradient(
     180deg,
-    rgba(3, 3, 3, 0.88) 0%,
-    rgba(3, 3, 3, 0.94) 40%,
-    rgba(3, 3, 3, 0.98) 100%
+    rgba(3, 3, 3, 0.60) 0%,
+    rgba(3, 3, 3, 0.75) 40%,
+    rgba(3, 3, 3, 0.88) 100%
   );
 }
 
@@ -840,7 +920,10 @@ body {
   .label-luxury,
   .text-editorial,
   .heading-display,
-  .glass-card {
+  .glass-card,
+  .glass-card-hero,
+  .luxury-particle-dust,
+  .input-gold-underline {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -857,6 +940,35 @@ body {
 
   .shimmer {
     animation: none !important;
+  }
+
+  /* Phase 8: Disable ALL Tailwind animate-* utility animations */
+  .animate-mechanical-reveal,
+  .animate-gold-sweep,
+  .animate-vault-unlock,
+  .animate-liquid-gold,
+  .animate-ken-burns,
+  .animate-parallax-float,
+  .animate-gold-pulse-ring,
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-scale-in,
+  .animate-pulse-gold {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  /* Catch-all: disable inline style animations on dashboard/page cards */
+  [style*="animation"] {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Disable hover parallax zoom on property cards */
+  .group:hover .group-hover\:scale-\[1\.08\] {
+    transform: none !important;
   }
 }
 
@@ -996,9 +1108,9 @@ body {
    ======================================== */
 
 .hero-video-container {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
   pointer-events: none;
 }
@@ -1009,45 +1121,51 @@ body {
   object-fit: cover;
   opacity: 0;
   transition: opacity 1.2s ease-in-out;
+  /* CSS fallback: fade in after 1.5s even if JS event doesn't fire */
+  animation: heroVideoFallbackFadeIn 2s ease-in-out 1.5s forwards;
 }
 
 .hero-video-loaded {
   opacity: 1;
+  animation: none; /* Cancel fallback if JS load event fired */
+}
+
+@keyframes heroVideoFallbackFadeIn {
+  to { opacity: 1; }
 }
 
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(5, 5, 5, 0.85) 0%,
-    rgba(5, 5, 5, 0.92) 40%,
-    rgba(5, 5, 5, 0.97) 100%
-  );
+  /* Radial spotlight: lighter at center (where content sits), darker at edges */
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(5, 5, 5, 0.25) 0%, rgba(5, 5, 5, 0.50) 60%, rgba(5, 5, 5, 0.80) 100%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.15) 0%, rgba(5, 5, 5, 0.40) 50%, rgba(5, 5, 5, 0.70) 100%);
 }
 
 .hero-video-toggle {
-  position: absolute;
-  bottom: 16px;
+  position: fixed;
+  bottom: 80px;
   right: 16px;
   padding: 10px;
   min-width: 44px;
   min-height: 44px;
   border-radius: 50%;
-  background-color: rgba(17, 17, 17, 0.7);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid var(--border-subtle);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  border: 1px solid var(--glass-border);
   color: var(--text-muted);
   cursor: pointer;
   pointer-events: auto;
-  z-index: 2;
+  z-index: 100;
   transition: all var(--duration) var(--ease);
 }
 
 .hero-video-toggle:hover {
   color: var(--gold);
   border-color: var(--border-gold);
+  box-shadow: 0 0 24px var(--gold-glow-sm);
 }
 
 /* ========================================
@@ -2152,6 +2270,19 @@ body {
   position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 50%, rgba(201, 169, 98, 0.08) 100%);
+}
+
+/* Building icon placeholder behind image */
+.listing-card-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' fill='none' stroke='%23C9A962' stroke-width='1' viewBox='0 0 24 24'%3E%3Cpath d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'/%3E%3C/svg%3E") no-repeat center center;
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 @media (min-width: 640px) {
@@ -2395,34 +2526,42 @@ body {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 50% at 15% 85%, rgba(100, 68, 15, 0.20) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 40% at 85% 15%, rgba(201, 169, 98, 0.18) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(110, 75, 18, 0.18) 0%, transparent 55%);
-  animation: ambientShift 25s ease-in-out infinite alternate;
+    radial-gradient(ellipse 80% 50% at 15% 85%, rgba(100, 68, 15, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 85% 15%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(201, 169, 98, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 60% at 50% 100%, rgba(110, 75, 18, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 70% 60%, rgba(139, 105, 20, 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse 50% 35% at 30% 40%, rgba(80, 55, 12, 0.08) 0%, transparent 50%);
+  animation: ambientShift 35s ease-in-out infinite alternate;
 }
 
 @keyframes ambientShift {
   0% {
     background:
-      radial-gradient(ellipse 80% 50% at 15% 85%, rgba(100, 68, 15, 0.20) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 40% at 85% 15%, rgba(201, 169, 98, 0.18) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse 100% 60% at 50% 100%, rgba(110, 75, 18, 0.18) 0%, transparent 55%);
+      radial-gradient(ellipse 80% 50% at 15% 85%, rgba(100, 68, 15, 0.18) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 85% 15%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(201, 169, 98, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 60% at 50% 100%, rgba(110, 75, 18, 0.15) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 30% at 70% 60%, rgba(139, 105, 20, 0.10) 0%, transparent 45%),
+      radial-gradient(ellipse 50% 35% at 30% 40%, rgba(80, 55, 12, 0.08) 0%, transparent 50%);
   }
   50% {
     background:
-      radial-gradient(ellipse 90% 60% at 75% 70%, rgba(90, 62, 14, 0.18) 0%, transparent 55%),
-      radial-gradient(ellipse 70% 50% at 25% 25%, rgba(201, 169, 98, 0.22) 0%, transparent 50%),
-      radial-gradient(ellipse 45% 35% at 60% 45%, rgba(201, 169, 98, 0.10) 0%, transparent 50%),
-      radial-gradient(ellipse 110% 70% at 55% 90%, rgba(105, 72, 16, 0.16) 0%, transparent 55%);
+      radial-gradient(ellipse 90% 60% at 75% 70%, rgba(90, 62, 14, 0.16) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 25% 25%, rgba(201, 169, 98, 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse 45% 35% at 60% 45%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 110% 70% at 55% 90%, rgba(105, 72, 16, 0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 25% at 40% 70%, rgba(139, 105, 20, 0.12) 0%, transparent 45%),
+      radial-gradient(ellipse 55% 40% at 60% 30%, rgba(80, 55, 12, 0.10) 0%, transparent 50%);
   }
   100% {
     background:
-      radial-gradient(ellipse 85% 55% at 40% 80%, rgba(95, 65, 15, 0.19) 0%, transparent 55%),
-      radial-gradient(ellipse 65% 45% at 65% 10%, rgba(201, 169, 98, 0.20) 0%, transparent 50%),
-      radial-gradient(ellipse 55% 40% at 45% 55%, rgba(201, 169, 98, 0.09) 0%, transparent 50%),
-      radial-gradient(ellipse 105% 65% at 45% 95%, rgba(100, 68, 16, 0.17) 0%, transparent 55%);
+      radial-gradient(ellipse 85% 55% at 40% 80%, rgba(95, 65, 15, 0.17) 0%, transparent 55%),
+      radial-gradient(ellipse 65% 45% at 65% 10%, rgba(201, 169, 98, 0.16) 0%, transparent 50%),
+      radial-gradient(ellipse 55% 40% at 45% 55%, rgba(201, 169, 98, 0.07) 0%, transparent 50%),
+      radial-gradient(ellipse 105% 65% at 45% 95%, rgba(100, 68, 16, 0.15) 0%, transparent 55%),
+      radial-gradient(ellipse 45% 30% at 55% 55%, rgba(139, 105, 20, 0.11) 0%, transparent 45%),
+      radial-gradient(ellipse 45% 30% at 50% 45%, rgba(80, 55, 12, 0.09) 0%, transparent 50%);
   }
 }
 
@@ -2432,41 +2571,41 @@ body {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 120% 80% at 30% 90%, rgba(120, 80, 20, 0.25) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 75% 10%, rgba(201, 169, 98, 0.30) 0%, transparent 50%),
+    radial-gradient(ellipse 120% 80% at 20% 85%, rgba(120, 80, 20, 0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 80% 10%, rgba(201, 169, 98, 0.30) 0%, transparent 50%),
     radial-gradient(circle 500px at 50% 50%, rgba(201, 169, 98, 0.12) 0%, transparent 60%),
     radial-gradient(ellipse 100% 70% at 50% 100%, rgba(140, 95, 25, 0.20) 0%, transparent 55%);
-  animation: loginAuroraShift 20s ease-in-out infinite alternate;
+  animation: loginAuroraShift 12s ease-in-out infinite alternate;
 }
 
 @keyframes loginAuroraShift {
   0% {
     background:
-      radial-gradient(ellipse 120% 80% at 30% 90%, rgba(120, 80, 20, 0.25) 0%, transparent 55%),
-      radial-gradient(ellipse 80% 60% at 75% 10%, rgba(201, 169, 98, 0.30) 0%, transparent 50%),
+      radial-gradient(ellipse 120% 80% at 20% 85%, rgba(120, 80, 20, 0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 60% at 80% 10%, rgba(201, 169, 98, 0.30) 0%, transparent 50%),
       radial-gradient(circle 500px at 50% 50%, rgba(201, 169, 98, 0.12) 0%, transparent 60%),
       radial-gradient(ellipse 100% 70% at 50% 100%, rgba(140, 95, 25, 0.20) 0%, transparent 55%);
   }
   33% {
     background:
-      radial-gradient(ellipse 130% 85% at 60% 85%, rgba(110, 75, 18, 0.22) 0%, transparent 55%),
-      radial-gradient(ellipse 90% 65% at 40% 15%, rgba(201, 169, 98, 0.35) 0%, transparent 50%),
-      radial-gradient(circle 450px at 55% 45%, rgba(201, 169, 98, 0.14) 0%, transparent 60%),
-      radial-gradient(ellipse 110% 75% at 55% 95%, rgba(130, 88, 22, 0.18) 0%, transparent 55%);
+      radial-gradient(ellipse 140% 90% at 70% 75%, rgba(130, 88, 22, 0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 100% 70% at 25% 20%, rgba(201, 169, 98, 0.38) 0%, transparent 50%),
+      radial-gradient(circle 600px at 60% 40%, rgba(201, 169, 98, 0.16) 0%, transparent 60%),
+      radial-gradient(ellipse 120% 80% at 35% 90%, rgba(110, 75, 18, 0.22) 0%, transparent 55%);
   }
   66% {
     background:
-      radial-gradient(ellipse 115% 75% at 45% 95%, rgba(125, 82, 22, 0.24) 0%, transparent 55%),
-      radial-gradient(ellipse 85% 55% at 80% 20%, rgba(201, 169, 98, 0.28) 0%, transparent 50%),
-      radial-gradient(circle 550px at 40% 55%, rgba(201, 169, 98, 0.10) 0%, transparent 60%),
-      radial-gradient(ellipse 95% 65% at 40% 90%, rgba(135, 90, 24, 0.20) 0%, transparent 55%);
+      radial-gradient(ellipse 110% 70% at 80% 90%, rgba(115, 78, 20, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse 90% 65% at 15% 30%, rgba(201, 169, 98, 0.32) 0%, transparent 50%),
+      radial-gradient(circle 450px at 40% 60%, rgba(201, 169, 98, 0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 130% 85% at 65% 95%, rgba(140, 95, 25, 0.26) 0%, transparent 55%);
   }
   100% {
     background:
-      radial-gradient(ellipse 125% 82% at 50% 88%, rgba(115, 78, 20, 0.23) 0%, transparent 55%),
-      radial-gradient(ellipse 75% 58% at 55% 12%, rgba(201, 169, 98, 0.32) 0%, transparent 50%),
-      radial-gradient(circle 480px at 48% 48%, rgba(201, 169, 98, 0.13) 0%, transparent 60%),
-      radial-gradient(ellipse 105% 72% at 48% 95%, rgba(125, 85, 22, 0.18) 0%, transparent 55%);
+      radial-gradient(ellipse 130% 85% at 75% 80%, rgba(125, 85, 22, 0.26) 0%, transparent 55%),
+      radial-gradient(ellipse 85% 55% at 20% 15%, rgba(201, 169, 98, 0.35) 0%, transparent 50%),
+      radial-gradient(circle 550px at 45% 45%, rgba(201, 169, 98, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 115% 75% at 40% 95%, rgba(120, 80, 20, 0.24) 0%, transparent 55%);
   }
 }
 
@@ -2716,4 +2855,159 @@ body {
     radial-gradient(ellipse 60% 40% at 85% 15%, rgba(201, 169, 98, 0.08) 0%, transparent 50%),
     radial-gradient(ellipse 50% 40% at 50% 50%, rgba(201, 169, 98, 0.03) 0%, transparent 50%),
     radial-gradient(ellipse 100% 60% at 50% 100%, rgba(18, 10, 5, 0.12) 0%, transparent 55%);
+}
+
+/* ========================================
+   SHADCN/UI THEME — Black Titanium & Liquid Gold
+   ======================================== */
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 40 25% 93%;
+    --card: 0 0% 6.7%;
+    --card-foreground: 40 25% 93%;
+    --popover: 0 0% 6.7%;
+    --popover-foreground: 40 25% 93%;
+    --primary: 41 42% 51%;
+    --primary-foreground: 0 0% 2%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 40 25% 93%;
+    --muted: 30 5% 40%;
+    --muted-foreground: 30 5% 40%;
+    --accent: 41 42% 51%;
+    --accent-foreground: 0 0% 2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 41 42% 51% / 0.08;
+    --input: 41 42% 51% / 0.12;
+    --ring: 41 42% 51%;
+    --chart-1: 41 42% 51%;
+    --chart-2: 41 42% 40%;
+    --chart-3: 142 71% 45%;
+    --chart-4: 41 42% 60%;
+    --chart-5: 0 84% 60%;
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ========================================
+   GLASSMORPHISM UTILITY CLASSES
+   ======================================== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card-hero {
+  background: rgba(10, 10, 10, 0.65);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border: 1px solid rgba(201, 169, 98, 0.08);
+  border-radius: 1.5rem;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(201, 169, 98, 0.06);
+}
+
+/* Gold shimmer text effect */
+.text-shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    var(--gold-dark) 0%,
+    var(--gold) 25%,
+    var(--gold-bright) 50%,
+    var(--gold) 75%,
+    var(--gold-dark) 100%
+  );
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: liquidGold 3s ease-in-out infinite;
+}
+
+@keyframes liquidGold {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Gold underline input style */
+.input-gold-underline {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--border-subtle);
+  border-radius: 0;
+  padding: 1rem 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  transition: border-color var(--duration-slow) var(--ease);
+}
+
+.input-gold-underline:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+  box-shadow: 0 2px 12px var(--gold-glow-sm);
+}
+
+.input-gold-underline::placeholder {
+  color: var(--text-ghost);
+  font-style: italic;
+}
+
+/* ========================================
+   RESPONSIVE POLISH — MOBILE FIRST
+   ======================================== */
+
+/* Mobile: Glass cards full-width, reduced blur for performance */
+@media (max-width: 640px) {
+  .glass-card-hero {
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(201, 169, 98, 0.06);
+  }
+
+  .glass-card {
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  }
+
+  /* Reduce particle count on mobile for performance */
+  .luxury-particle:nth-child(n+5),
+  .luxury-particle-dust {
+    display: none;
+  }
+
+  /* Ensure aurora is lighter on mobile GPUs */
+  .aurora-ambient {
+    opacity: 0.3;
+  }
+}
+
+/* Touch target enforcement — minimum 44px for all interactive elements */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  [role="link"],
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
