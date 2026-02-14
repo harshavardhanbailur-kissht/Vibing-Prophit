@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, Fragment } from 'react';
 import { useRouter } from 'next/navigation';
 import { Logo } from '@/components/Logo';
 import { useFlow } from '@/context/FlowContext';
@@ -183,7 +183,7 @@ export default function PhonePage() {
       </div>
 
       {/* Glass Card Content Container */}
-      <div className="glass-card-hero w-full max-w-sm sm:max-w-md relative z-10 p-8 sm:p-10">
+      <div className={`glass-card-hero w-full max-w-sm sm:max-w-md relative z-10 p-8 sm:p-10 transition-shadow duration-700 ease-luxury ${isValid ? 'shadow-gold-glow-md' : ''}`}>
         <div className="flex flex-col items-center">
           {/* Logo */}
           <Logo className="w-56 h-10 mb-4" variant="dark" />
@@ -312,9 +312,11 @@ export default function PhonePage() {
           </div>
 
           {/* Testimonial */}
-          <p className="text-text-muted text-xs text-center mt-4 italic opacity-70">
-            <span className="text-gold/60">&ldquo;</span>Transformed my portfolio in 6 months<span className="text-gold/60">&rdquo;</span>
-            <span className="text-text-secondary not-italic"> — Rajesh M.</span>
+          <p className="text-text-muted text-xs text-center mt-4 italic opacity-70 leading-relaxed">
+            <span className="text-gold/40 font-display text-lg leading-none align-top">&ldquo;</span>
+            Transformed my portfolio in 6 months
+            <span className="text-gold/40 font-display text-lg leading-none align-bottom">&rdquo;</span>
+            <span className="text-text-secondary not-italic block mt-1 text-micro tracking-wider uppercase">Rajesh M., Mumbai</span>
           </p>
         </div>
       </div>
@@ -322,14 +324,18 @@ export default function PhonePage() {
       {/* Bottom Stats Ticker */}
       <div className="relative z-10 mt-8 flex items-center gap-6 sm:gap-10">
         {STATS.map((stat, i) => (
-          <div
-            key={stat.label}
-            className="text-center"
-            style={{ opacity: 0, animation: `fadeInUp 0.5s ease-out ${1.2 + i * 0.15}s forwards` }}
-          >
-            <p className="text-gold font-display text-xl sm:text-2xl font-light">{stat.value}</p>
-            <p className="text-text-muted text-micro uppercase tracking-widest mt-1">{stat.label}</p>
-          </div>
+          <Fragment key={stat.label}>
+            {i > 0 && (
+              <div className="w-px h-8 bg-gradient-to-b from-transparent via-gold/20 to-transparent" />
+            )}
+            <div
+              className="text-center"
+              style={{ opacity: 0, animation: `fadeInUp 0.5s ease-out ${1.2 + i * 0.15}s forwards` }}
+            >
+              <p className="text-gold font-display text-xl sm:text-2xl font-light">{stat.value}</p>
+              <p className="text-text-muted text-micro uppercase tracking-widest mt-1">{stat.label}</p>
+            </div>
+          </Fragment>
         ))}
       </div>
 

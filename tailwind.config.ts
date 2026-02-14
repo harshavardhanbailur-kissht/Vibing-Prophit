@@ -126,6 +126,7 @@ const config: Config = {
         'gold-glow-xl': '0 0 80px rgba(201, 169, 98, 0.35)',
         'card': '0 8px 32px rgba(0, 0, 0, 0.6)',
         'card-hover': '0 16px 48px rgba(0, 0, 0, 0.7), 0 0 24px rgba(201, 169, 98, 0.08)',
+        'card-elevated': '0 12px 40px rgba(0, 0, 0, 0.65), 0 0 16px rgba(201, 169, 98, 0.06)',
         'glass': '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(201, 169, 98, 0.06)',
         'inner-glow': 'inset 0 1px 0 rgba(201, 169, 98, 0.08)',
         'elevation-1': '0 1px 2px rgba(0, 0, 0, 0.4)',
@@ -142,6 +143,7 @@ const config: Config = {
         'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         'precision': 'cubic-bezier(0.22, 0.61, 0.36, 1)',
         'decel': 'cubic-bezier(0, 0.55, 0.45, 1)',
+        'reveal': 'cubic-bezier(0.0, 0.0, 0.2, 1)',
       },
       animation: {
         'shake': 'shake 0.4s ease-in-out',

@@ -139,21 +139,23 @@ export default function PersonalizePage() {
 
           {/* Name Input — Gold Underline */}
           <div className="w-full mb-6">
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setNameLocal(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Enter your name"
-              autoFocus
-              className={`input-gold-underline w-full text-center text-lg ${isValid ? 'valid' : ''}`}
-              aria-label="Your name"
-              maxLength={30}
-            />
+            <div className="input-gold-underline-wrapper">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setNameLocal(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Enter your name"
+                autoFocus
+                className={`input-gold-underline w-full text-center text-lg ${isValid ? 'valid' : ''}`}
+                aria-label="Your name"
+                maxLength={30}
+              />
+            </div>
 
             {/* Live Name Preview — 2x Gold Serif */}
             {isValid && !showWelcome && (
-              <p className="font-display text-2xl text-gold text-center mt-6 animate-fade-in">
+              <p className="font-display text-2xl text-gold/80 text-center mt-6 animate-fade-in font-light tracking-wide">
                 {name.trim()}
               </p>
             )}
@@ -203,6 +205,9 @@ export default function PersonalizePage() {
         >
           {/* Enhanced Ambient Sapphire-Gold Glow */}
           <div className="welcome-glow-enhanced" aria-hidden="true" />
+
+          {/* Cinematic Light Sweep */}
+          <div className="welcome-light-sweep" aria-hidden="true" />
 
           {/* Floating Gold Particles — More particles for richer effect */}
           <div className="welcome-particles" aria-hidden="true">

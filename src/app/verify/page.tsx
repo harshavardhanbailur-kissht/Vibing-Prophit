@@ -104,7 +104,7 @@ export default function VerifyPage() {
 
           {/* Subheading — masked phone */}
           <p className="text-text-secondary text-center mb-8 text-sm">
-            Enter the code sent to <span className="text-gold/80 font-medium">{maskedPhone}</span>
+            Enter the code sent to <span className="text-gold/80 font-mono tracking-[0.15em] font-medium">{maskedPhone}</span>
           </p>
 
           {/* Gold Separator */}
@@ -135,7 +135,7 @@ export default function VerifyPage() {
                 {/* Horizontal Progress Bar */}
                 <div className="w-full max-w-[200px] h-[2px] rounded-full bg-titanium-elevated/80 overflow-hidden relative">
                   <div
-                    className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light transition-all duration-1000 linear"
+                    className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-gold-dark via-gold to-gold-light transition-all duration-1000 linear verify-progress-fill"
                     style={{
                       width: `${progressPercent}%`,
                       boxShadow: '0 0 8px rgba(201, 169, 98, 0.3)',
@@ -155,7 +155,7 @@ export default function VerifyPage() {
           {/* Demo Hint — Premium styled */}
           <div className="mt-6 px-4 py-2.5 rounded-xl border border-gold/8 bg-titanium-surface/30 backdrop-blur-sm">
             <p className="text-text-muted text-caption text-center">
-              Demo mode <span className="text-gold/30 mx-1.5">&middot;</span> Enter <span className="text-gold font-mono tracking-widest font-medium">1111</span> to verify
+              Demo mode <span className="text-gold/30 mx-1.5">&middot;</span> Enter <span className="text-gold font-mono tracking-widest font-medium">1111</span><span className="inline-block w-[2px] h-3 bg-gold/50 ml-0.5 align-middle animate-pulse-gold" /> to verify
             </p>
           </div>
         </div>

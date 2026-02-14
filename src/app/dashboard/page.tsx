@@ -59,7 +59,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-col px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto safe-top safe-bottom">
       {/* Sticky Header */}
-      <header className="flex items-center justify-between mb-8 page-transition sticky top-0 z-20 py-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-titanium-deep/80 backdrop-blur-xl border-b border-white/[0.03]">
+      <header className="flex items-center justify-between mb-8 page-transition sticky top-0 z-20 py-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 bg-titanium-deep/85 backdrop-blur-2xl border-b border-gold/[0.06]">
         <Logo className="w-36 h-6 sm:w-40 sm:h-7" variant="dark" />
 
         <div className="flex items-center gap-4">
@@ -86,7 +86,7 @@ export default function DashboardPage() {
       </header>
 
       {/* Welcome Hero Banner */}
-      <section className="glass-card-hero p-6 sm:p-8 mb-8" style={{ opacity: 0, animation: 'fadeInUp 0.6s ease-out 0.1s forwards' }}>
+      <section className="glass-card-hero p-6 sm:p-8 mb-8 border border-gold/[0.06]" style={{ opacity: 0, animation: 'fadeInUp 0.6s ease-out 0.1s forwards' }}>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <p className="text-text-muted text-micro uppercase tracking-widest mb-2">{getGreeting()}</p>
@@ -132,7 +132,7 @@ export default function DashboardPage() {
           {filteredProperties.map((property, index) => (
             <article
               key={property.id}
-              className="group relative bg-titanium-surface/60 backdrop-blur-sm border border-white/[0.04] rounded-xl overflow-hidden cursor-pointer transition-all duration-500 ease-luxury hover:border-gold/20 hover:shadow-card-hover"
+              className="group relative bg-titanium-surface/60 backdrop-blur-sm border border-white/[0.04] rounded-xl overflow-hidden cursor-pointer transition-all duration-500 ease-luxury hover:border-gold/20 hover:shadow-card-hover property-card-accent"
               style={{ opacity: 0, animation: `fadeInUp 0.5s ease-out ${0.15 + index * 0.08}s forwards` }}
               onClick={() => router.push(`/dashboard/${property.id}`)}
               role="link"
@@ -158,7 +158,7 @@ export default function DashboardPage() {
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
                 {/* Hover Overlay with Quick Stats */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-40 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
                   <div className="flex items-center gap-3 text-xs">
                     <span className="text-white/80">{property.city}</span>
                     <span className="text-gold/60">&middot;</span>
@@ -171,7 +171,7 @@ export default function DashboardPage() {
 
               {/* Price + Growth */}
               <div className="p-4">
-                <p className="text-white font-serif text-lg tracking-tight">
+                <p className="text-white font-display text-lg tracking-tight font-light">
                   {formatPrice(property.priceMinInr)} &ndash; {formatPrice(property.priceMaxInr)}
                 </p>
                 <div className="flex items-center gap-1.5 mt-2">
